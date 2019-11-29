@@ -1,7 +1,6 @@
 package com.tzword.concurrency.example.count;
 
 import com.tzword.concurrency.annotations.NotThreadSafe;
-import com.tzword.concurrency.annotations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
@@ -11,7 +10,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-@ThreadSafe
+@NotThreadSafe
 public class CountExample2 {
     //请求总数
     public static int CLIENT_TOTAL = 5000;
@@ -37,10 +36,13 @@ public class CountExample2 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}",COUNT.get());
+        log.info("count:{}", COUNT.get());
     }
 
     public static void add(){
+        //先做增加操作，再获取当前的值
         COUNT.incrementAndGet();
+        //先获取当前的值，再做增加操作
+        //COUNT.getAndAccumulate();
     }
 }
