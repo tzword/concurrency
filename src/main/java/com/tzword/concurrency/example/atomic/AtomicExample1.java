@@ -1,4 +1,4 @@
-package com.tzword.concurrency.example.count;
+package com.tzword.concurrency.example.atomic;
 
 import com.tzword.concurrency.annotations.NotThreadSafe;
 import com.tzword.concurrency.annotations.ThreadSafe;
@@ -9,15 +9,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 @ThreadSafe
-public class CountExample2 {
+public class AtomicExample1 {
     //请求总数
     public static int CLIENT_TOTAL = 5000;
     //同时并发执行的线程数
     public static int THREAD_TOTAL = 50;
-    public static AtomicInteger COUNT = new AtomicInteger(0);
+    public static AtomicLong COUNT = new AtomicLong(0);
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
