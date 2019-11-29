@@ -36,10 +36,13 @@ public class CountExample2 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count:{}",COUNT);
+        log.info("count:{}", COUNT.get());
     }
 
     public static void add(){
+        //先做增加操作，再获取当前的值
         COUNT.incrementAndGet();
+        //先获取当前的值，再做增加操作
+        //COUNT.getAndAccumulate();
     }
 }
